@@ -1,0 +1,94 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+img {
+	max-width: 100%;
+}
+
+html {
+	height: 100%;
+	font-size: 100%;
+}
+
+body {
+	@if $fixFooterStrategie == "flex" {
+		display: flex;
+		flex-direction: column;
+	} @else if $fixFooterStrategie == "positioning" {
+		position: relative;
+	}
+	min-height: 100%;
+    font-family: $primaryFont;
+	color: $shark;
+	background-color: $white;
+
+	&:before {
+		content: "sm";
+		display: none;
+	}
+
+	@media screen and (min-width: 600px) {
+		&::before {
+			content: "md";
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		&::before {
+			content: "large";
+		}
+	}
+
+	@media screen and (min-width: 1360px) {
+		&::before {
+			content: "xl";
+		}
+	}
+}
+
+.container {
+	@if $fixFooterStrategie == "flex" {
+		width: 100%;
+	}
+	max-width: 960px;
+	margin: auto;
+	padding: 0 $globalWrapperFields;
+	min-width: 320px;
+}
+
+
+main {
+	@if $fixFooterStrategie == "flex" {
+		flex-grow: 1;
+	} @else if $fixFooterStrategie == "positioning" {
+		padding-bottom: 104px; //footer approximate height
+	}
+}
+
+svg:hover {
+	fill: #D67822;
+}
+
+@keyframes flash {
+	0% {
+		background-color: rgba(#D67822, 0);
+	}
+	100% {
+		background-color: rgba(#D67822, 1);
+	}
+}
+
+.log {
+	line-height: 1.6;
+	span {
+		padding: 0 4px 2px;
+		border-radius: 6px;
+		background-color: #D67822;
+		color: #fff;
+		animation: flash 0.8s;
+	}
+}
+
